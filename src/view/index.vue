@@ -1,6 +1,9 @@
 <template>
     <div class="container1">
-        <background class="background" :style="[page2AnimationValue>0.1?`transform: scale(${page2AnimationValue}%);`:' ']"/>
+        <background class="background" :style="[page2AnimationValue < 100 ? `transform: scale(${page2AnimationValue}%);` : 'transform: scale(1);',
+        page2AnimationValue < 100 ? `border-radius:${page2AnimationValue/2}px;` : 'border-radius:0px;',
+        page2AnimationValue < 80 ? `position: absolute;top:290vh;` : 'position: fixed;'
+        ]" />
         <div id="intro" class="main">
             <h2 class=" h2">你好啊，我是</h2>
             <h1 class="newh h1">wujiahao</h1>
@@ -18,21 +21,40 @@
         </div>
         <div id="page2" class="main">
 
-            <p :class="page1AnimationValue > 0.1 && page1AnimationValue < 0.25 ? 'act' : ''">一名正在实习的前端的想法</p>
+            <p :class="page1AnimationValue > 0.1 && page1AnimationValue < 0.25 ? 'act' : ''">一名正在实习的前端的想法:</p>
             <p :class="page1AnimationValue > 0.25 && page1AnimationValue < 0.4 ? 'act' : ''">在我看来，以兴趣为驱动去学习是一件特别棒的事情。</p>
-            <p :class="page1AnimationValue > 0.4 && page1AnimationValue < 0.5 ? 'act' : ''">毕竟在读大学之前,自己一直是一个学业上的学渣,显得毫无用处。</p>
+            <p :class="page1AnimationValue > 0.4 && page1AnimationValue < 0.5 ? 'act' : ''">毕竟在读大学之前,自己一直是一个学业上的学渣,显得毫无用处。
+            </p>
             <p :class="page1AnimationValue > 0.5 && page1AnimationValue < 0.6 ? 'act' : ''">当然,在现实的引力下,各种过于理想的想法都会被拖拽下来。</p>
-            <p :class="page1AnimationValue > 0.6 && page1AnimationValue < 0.7 ? 'act' : ''">所以掌握足够扎实的理论基础后，以业务为驱动的学习是尤为重要的。</p>
+            <p :class="page1AnimationValue > 0.6 && page1AnimationValue < 0.7 ? 'act' : ''">所以掌握足够扎实的理论基础后，以业务为驱动的学习是尤为重要的。
+            </p>
             <p :class="page1AnimationValue > 0.7 && page1AnimationValue < 0.8 ? 'act' : ''">人生的意义或许也只是想找到个自圆其说。</p>
             <p :class="page1AnimationValue > 0.8 && page1AnimationValue < 0.95 ? 'act' : ''">或许这就是生活，不够完美但真实。</p>
 
+        </div>
+        <div class="main"></div>
+        <div class="main"></div>
+        <div id="page3" class="main">
+            <h1>你的下一个关注，何必是大佬</h1>
+            <!-- <ul>
+                <li>
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                </li>
+                <li>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </li>
+            </ul> -->
         </div>
 
     </div>
 </template>
 
 <script setup>
-import { ref,onMounted } from "vue"
+import { ref, onMounted } from "vue"
 import background from '../components/background.vue'
 import BackgroundAnimation from '../js/BackgroundAnimation'
 let page1AnimationValue = ref(0)
@@ -40,21 +62,21 @@ let page2AnimationValue = ref(0)
 /**
  *  给一个变化的变量，然后给这个变量变化的区间，然后给返回的值的变化区间
  * 例如：scaleValue(bgAnimation.scrollFraction, [0.54, 0.66], [0, .7]);
- **/ 
+ **/
 function scaleValue(input, inputRange, outputRange) {
-  return (input - inputRange[0]) * (outputRange[1] - outputRange[0]) / (inputRange[1] - inputRange[0]) + outputRange[0];
+    return (input - inputRange[0]) * (outputRange[1] - outputRange[0]) / (inputRange[1] - inputRange[0]) + outputRange[0];
 }
-const page2Animation =()=>{
-    const scoll1 = new BackgroundAnimation(50,200)
-    const scoll2 = new BackgroundAnimation(200,300)
+const page2Animation = () => {
+    const scoll1 = new BackgroundAnimation(50, 200)
+    const scoll2 = new BackgroundAnimation(200, 300)
     window.addEventListener('scroll', () => {
-    page1AnimationValue.value = scoll1.getScrollFraction()
-    page2AnimationValue.value = scaleValue(scoll2.getScrollFraction(),[0.1, 0.9], [100, 60])
-    console.log( page2AnimationValue.value);
-  })
-} 
+        page1AnimationValue.value = scoll1.getScrollFraction()
+        page2AnimationValue.value = scaleValue(scoll2.getScrollFraction(), [0.1, 0.9], [100, 80])
+        // console.log(page2AnimationValue.value);
+    })
+}
 
-onMounted(()=>{
+onMounted(() => {
     page2Animation()
 })
 </script>
@@ -62,10 +84,11 @@ onMounted(()=>{
 <style lang="less" scoped>
 .container1 {
     .background {
-        position: fixed;
+        // position: absolute;
         top: 0;
         left: 0;
         z-index: -1;
+        overflow: hidden;
     }
 
     .main {
@@ -141,8 +164,22 @@ onMounted(()=>{
             font-weight: 700;
             color: rgba(228, 228, 228, 0.3);
         }
-        .act{
+
+        .act {
             color: rgba(255, 255, 255);
+        }
+    }
+    #page3{
+        width: 100%;
+        height: 120vh;
+        margin-top: -30vh;
+        background-color: rgba(245, 245, 247);
+        color: #a18cd1;
+        justify-content: center;
+        flex-wrap: nowrap;
+        h1{
+            margin-top: 5vh;
+            font-size: 65px;
         }
     }
 }
@@ -159,5 +196,4 @@ onMounted(()=>{
     100% {
         background-position: 0% 50%;
     }
-}
-</style>
+}</style>
