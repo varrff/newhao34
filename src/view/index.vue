@@ -174,11 +174,13 @@ const postBiaoqian = async () => {
             })
             getBiaoqiant()
         }
+    } catch (error) {
         if (res.response.status == 429) {
             ElMessage.error('一次只能添加一个标签，请在2小时后再添加')
+        }else{
+            ElMessage.error('一次只能添加一个标签，请在2小时后再添加')
         }
-    } catch (error) {
-        ElMessage.error('服务器故障，请稍后再试')
+
     }
     // console.log(res.response.status);
 }
