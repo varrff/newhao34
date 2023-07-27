@@ -42,7 +42,7 @@
                 <img src="@assets/images/index/3.PNG" alt="">
                 <img src="@assets/images/index/4.PNG" alt="">
                 <img src="@assets/images/index/5.PNG" alt=""> -->
-                <img src=" https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/1.PNG" alt="">
+                <img src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/1.PNG" alt="">
                 <img src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/2.PNG" alt="">
                 <img src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/3.PNG" alt="">
                 <img src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/4.PNG" alt="">

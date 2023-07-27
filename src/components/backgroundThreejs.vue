@@ -4,8 +4,7 @@
       <source src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/video/kinect.webm">
       <!-- <source src="../assets/video/kinect.webm"> -->
 
-      <source src="
-https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/video/kinect.mp4">
+      <source src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/video/kinect.mp4">
       <!-- <source src="../assets/video/kinect.mp4"> -->
     </video>
   </div>
