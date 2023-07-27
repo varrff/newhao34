@@ -1,7 +1,7 @@
 <template>
     <div class="container1">
-        <background class="background" :style="[page2AnimationValue < 100 ? `transform: scale(${page2AnimationValue}%);` : 'transform: scale(1);',
-        page2AnimationValue < 100 ? `border-radius:${page2AnimationValue/2}px;` : 'border-radius:0px;',
+        <background class="background" :style="[page2AnimationValue < 96 ? `transform: scale(${page2AnimationValue}%);` : 'transform: scale(1);',
+        page2AnimationValue < 96 ? `border-radius:${page2AnimationValue / 2}px;` : 'border-radius:0px;',
         page2AnimationValue < 80 ? `position: absolute;top:290vh;` : 'position: fixed;'
         ]" />
         <div id="intro" class="main">
@@ -29,25 +29,29 @@
             <p :class="page1AnimationValue > 0.6 && page1AnimationValue < 0.7 ? 'act' : ''">所以掌握足够扎实的理论基础后，以业务为驱动的学习是尤为重要的。
             </p>
             <p :class="page1AnimationValue > 0.7 && page1AnimationValue < 0.8 ? 'act' : ''">人生的意义或许也只是想找到个自圆其说。</p>
-            <p :class="page1AnimationValue > 0.8 && page1AnimationValue < 0.95 ? 'act' : ''">或许这就是生活，不够完美但真实。</p>
+            <p :class="page1AnimationValue > 0.8 && page1AnimationValue < 0.9 ? 'act' : ''">或许这就是生活，不够完美但真实。</p>
 
         </div>
         <div class="main"></div>
         <div class="main"></div>
         <div id="page3" class="main">
             <h1>你的下一个关注，何必是大佬</h1>
-            <!-- <ul>
-                <li>
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                </li>
-                <li>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </li>
-            </ul> -->
+
+            <div class="page3-top" ref="page3Top">
+                <img src="@assets/images/index/1.PNG" alt="">
+                <img src="@assets/images/index/2.PNG" alt="">
+                <img src="@assets/images/index/3.PNG" alt="">
+                <img src="@assets/images/index/4.PNG" alt="">
+                <img src="@assets/images/index/5.PNG" alt="">
+            </div>
+            <div class="page3-buttom" ref="page3Buttom">
+                <span class="icon" style="color: #232323;">&#xe673;</span>
+                <span class="icon" style="color: #009605;">&#xe643;</span>
+                <span class="icon" style="transform: scale(0.8) translateX(-10%); color: #ffe120;">&#xe8ae;</span>
+                <span class="icon juejin">&#xe643;</span>
+                <span class="icon" style="transform: scale(0.8) translateX(-10%); color: #242424;">&#xe600;</span>
+            </div>
+
         </div>
 
     </div>
@@ -55,10 +59,10 @@
 
 <script setup>
 import { ref, onMounted } from "vue"
-import background from '../components/background.vue'
+import background from '../components/backgroundThreejs.vue'
 import BackgroundAnimation from '../js/BackgroundAnimation'
 let page1AnimationValue = ref(0)
-let page2AnimationValue = ref(0)
+let page2AnimationValue = ref(110)
 /**
  *  给一个变化的变量，然后给这个变量变化的区间，然后给返回的值的变化区间
  * 例如：scaleValue(bgAnimation.scrollFraction, [0.54, 0.66], [0, .7]);
@@ -72,12 +76,60 @@ const page2Animation = () => {
     window.addEventListener('scroll', () => {
         page1AnimationValue.value = scoll1.getScrollFraction()
         page2AnimationValue.value = scaleValue(scoll2.getScrollFraction(), [0.1, 0.9], [100, 80])
-        // console.log(page2AnimationValue.value);
+        console.log(page2AnimationValue.value);
     })
 }
+const page3Top = ref(null)
+const page3Buttom = ref(null)
+const page3Animation = () => {
 
+    for (let index = 0; index < page3Buttom.value.children.length; index++) {
+        const ele = page3Buttom.value.children[index];
+        const ele2 = page3Top.value.children;
+        ele.addEventListener('mousemove', e => {
+            let item = e.target
+            let itemRect = item.getBoundingClientRect()
+            let offset = Math.abs(e.clientY - itemRect.top) / itemRect.height
+
+            let prev = item.previousElementSibling || null
+            let next = item.nextElementSibling || null;
+
+            let prev2 = ele2[index-1] || null
+            let next2 = ele2[index+1] || null;
+  
+            let scale = 0.6
+
+            resetScale()
+            console.log(offset);
+            if (prev) {
+                prev.style.setProperty('--scale', 1 + scale * Math.abs(offset - 1))
+                // prev2.style.setProperty('--scale',1-offset)
+            }
+
+            item.style.setProperty('--scale', 1 + scale)
+            ele2[index].style.setProperty('--scale', 1 + scale)
+            if (next) {
+                next.style.setProperty('--scale', 1 + scale * offset)
+                // next2.style.setProperty('--scale',offset)
+            }
+        })
+    }
+    // page3Buttom.value.addEventListener('mouseleave', e => {
+    //     resetScale()
+    // })
+    function resetScale() {
+        for (let index = 0; index < page3Buttom.value.children.length; index++) {
+            let item = page3Buttom.value.children[index];
+
+            item.style.setProperty('--scale', 1)
+            page3Top.value.children[index].style.setProperty('--scale', 1)
+        }
+    }
+    
+}
 onMounted(() => {
     page2Animation()
+    page3Animation()
 })
 </script>
 
@@ -169,17 +221,73 @@ onMounted(() => {
             color: rgba(255, 255, 255);
         }
     }
-    #page3{
+
+    #page3 {
         width: 100%;
-        height: 120vh;
+        height: 115vh;
         margin-top: -30vh;
         background-color: rgba(245, 245, 247);
+        // color: #222222;
         color: #a18cd1;
         justify-content: center;
         flex-wrap: nowrap;
-        h1{
+        position: relative;
+        
+        h1 {
             margin-top: 5vh;
-            font-size: 65px;
+            font-size: 3vw;
+        }
+
+        .page3-top {
+            position: absolute;
+            width: 100vw;
+            height: 70vh;
+            top: 0;
+            // bottom: 50%;
+            transform: translateY(50%);
+            display: flex;
+            
+            img {
+                --scale:1;
+                width: calc(10.5vw + 4vw * var(--scale));
+                height: calc(23vw + 4vw * var(--scale));
+                position: relative;
+                // top: calc((5em *var(--scale)-5em)/5*-1);
+                transition: all .5s ease-out;
+                // transform: scale(calc(1 * var(--scale)));
+            }
+        }
+
+        .page3-buttom {
+            position: absolute;
+            width: 15%;
+            height: 100%;
+            // background-color: rgba(191, 191, 191);
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            --scale: 1;
+
+            span {
+                font-size: calc(6rem * var(--scale));
+                cursor: pointer;
+                position: relative;
+                top: calc((5em *var(--scale)-5em)/5*-1);
+                transition: 15ms all ease-out;
+                padding: 0 .5rem;
+
+                &.juejin {
+                    color: transparent;
+                    background-image: url('@assets/images/index/6.svg');
+                    // transform: scale(2.3) translate(-5%, -20%);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 80%;
+                }
+            }
+
         }
     }
 }
@@ -196,4 +304,5 @@ onMounted(() => {
     100% {
         background-position: 0% 50%;
     }
-}</style>
+}
+</style>

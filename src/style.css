@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'iconfont';  /* Project id 4185268 */
+  src: url('//at.alicdn.com/t/c/font_4185268_u94rifd2bt9.woff2?t=1690425632752') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4185268_u94rifd2bt9.woff?t=1690425632752') format('woff'),
+       url('//at.alicdn.com/t/c/font_4185268_u94rifd2bt9.ttf?t=1690425632752') format('truetype');
+}
+.icon {
+  font-family: 'iconfont'; 
+}
 *{
   padding: 0;
   margin: 0;
@@ -5,12 +14,12 @@
   font-size: 22px;
 }
 body{
-  height: 600vh;
+  width: 100vw;
+  height: 900vh;
+  overflow-x: hidden;
   background-color: #fff;
 }
 li{
   list-style: none;
-  image{
-
-  }
 }
+
