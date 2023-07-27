@@ -21,13 +21,13 @@ export default defineConfig({
     },
   },
   assetsInclude: ['**/*.PNG','**/*.svg'], // 在这里添加 .PNG 文件的设置
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://api.newhao2021.top:3001', // 设置你的后端 API 地址
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '') // 重写请求路径，如果你的 API 地址不包含 '/api' 前缀，可以去掉这一行
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'http://api.newhao2021.top:3001', // 设置你的后端 API 地址
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/api/, '') // 重写请求路径，如果你的 API 地址不包含 '/api' 前缀，可以去掉这一行
+  //     },
+  //   },
+  // },
 });
