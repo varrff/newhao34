@@ -37,18 +37,29 @@
             <h1>你的下一个关注，何必是大佬</h1>
 
             <div class="page3-top" ref="page3Top">
-                <img src="@assets/images/index/1.PNG" alt="">
+                <!-- <img src="@assets/images/index/1.PNG" alt="">
                 <img src="@assets/images/index/2.PNG" alt="">
                 <img src="@assets/images/index/3.PNG" alt="">
                 <img src="@assets/images/index/4.PNG" alt="">
-                <img src="@assets/images/index/5.PNG" alt="">
+                <img src="@assets/images/index/5.PNG" alt=""> -->
+                <img src=" https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/1.PNG" alt="">
+                <img src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/2.PNG" alt="">
+                <img src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/3.PNG" alt="">
+                <img src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/4.PNG" alt="">
+                <img src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/5.PNG" alt="">
             </div>
             <div class="page3-buttom" ref="page3Buttom">
-                <span @click="jumpSite('https://www.douyin.com/user/MS4wLjABAAAA-XHf1bm4eLyMDfa8pzXP2yiwLVBDbBdfq0eEe2G62FI')" class="icon" style="color: #232323;">&#xe673;</span>
-                <span @click="jumpSite('https://www.douban.com/people/190819556/?_i=3324722LkWkaot')" class="icon" style="color: #009605;">&#xe643;</span>
-                <span @click="jumpSite('https://m.okjike.com/users/76fa93ff-f9b1-45c2-b4e1-e3fdb011ebf9?ref=PROFILE_CARD&utm_source=user_card')" class="icon" style="transform: scale(0.8) translateX(-10%); color: #ffe120;">&#xe8ae;</span>
+                <span
+                    @click="jumpSite('https://www.douyin.com/user/MS4wLjABAAAA-XHf1bm4eLyMDfa8pzXP2yiwLVBDbBdfq0eEe2G62FI')"
+                    class="icon" style="color: #232323;">&#xe673;</span>
+                <span @click="jumpSite('https://www.douban.com/people/190819556/?_i=3324722LkWkaot')" class="icon"
+                    style="color: #009605;">&#xe643;</span>
+                <span
+                    @click="jumpSite('https://m.okjike.com/users/76fa93ff-f9b1-45c2-b4e1-e3fdb011ebf9?ref=PROFILE_CARD&utm_source=user_card')"
+                    class="icon" style="transform: scale(0.8) translateX(-10%); color: #ffe120;">&#xe8ae;</span>
                 <span @click="jumpSite('https://juejin.cn/user/22462119019479/posts')" class="icon juejin">&#xe643;</span>
-                <span @click="jumpSite('https://github.com/varrff')" class="icon" style="transform: scale(0.8) translateX(-10%); color: #242424;">&#xe600;</span>
+                <span @click="jumpSite('https://github.com/varrff')" class="icon"
+                    style="transform: scale(0.8) translateX(-10%); color: #242424;">&#xe600;</span>
             </div>
 
         </div>
@@ -72,7 +83,7 @@
 import { ref, onMounted } from "vue"
 import background from '../components/backgroundThreejs.vue'
 import BackgroundAnimation from '../js/BackgroundAnimation'
-import { getMessageData,postMessage } from '../api/index'
+import { getMessageData, postMessage } from '../api/index'
 import { ElMessage } from 'element-plus'
 let page1AnimationValue = ref(0)
 let page2AnimationValue = ref(110)
@@ -151,25 +162,34 @@ const getBiaoqiant = async () => {
     biaoqianData.value = await getMessageData()
 }
 const liuyanText = ref('')
-const postBiaoqian = async()=>{
+const postBiaoqian = async () => {
 
     try {
         const res = await postMessage(liuyanText.value)
-        if(res.response.status==1){
-            ElMessage('添加成功')
+        console.log(res);
+        if (res.response.status == 1) {
+            ElMessage({
+                message: '添加成功',
+                type: 'success',
+            })
+            getBiaoqiant()
+        }
+        if (res.response.status == 429) {
+            ElMessage.error('一次只能添加一个标签，请在2小时后再添加')
         }
     } catch (error) {
-        ElMessage.error(error)
+        ElMessage.error('服务器故障，请稍后再试')
     }
-    console.log(res.response.status);
+    // console.log(res.response.status);
 }
 /**
  * 跳转其他网站，接收一个URL参数
  */
-const jumpSite = url=>{
-    window.open(url,"_blank")
+const jumpSite = url => {
+    window.open(url, "_blank")
 }
 onMounted(() => {
+    window.scrollTo(0, 0)
     page2Animation()
     page3Animation()
     getBiaoqiant()
@@ -287,7 +307,7 @@ onMounted(() => {
             height: 70vh;
             top: 0;
             // bottom: 50%;
-            transform: translateY(50%);
+            transform: translate(-15%,50%);
             display: flex;
 
             img {
@@ -303,7 +323,7 @@ onMounted(() => {
 
         .page3-buttom {
             position: absolute;
-            width: 15%;
+            width: 25%;
             height: 100%;
             // background-color: rgba(191, 191, 191);
             right: 0;
@@ -372,7 +392,7 @@ onMounted(() => {
 
             button {
                 position: absolute;
-                bottom:2%;
+                bottom: 2%;
                 right: 1%;
                 background-color: transparent;
                 border: 0;
@@ -418,4 +438,5 @@ onMounted(() => {
     100% {
         transform: translateX(-100%);
     }
-}</style>
+}
+</style>

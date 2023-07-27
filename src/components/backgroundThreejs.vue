@@ -1,8 +1,12 @@
 <template>
   <div ref="container">
     <video ref="video" loop muted crossOrigin="anonymous" playsinline style="display:none">
-      <source src="../assets/video/kinect.webm">
-      <source src="../assets/video/kinect.mp4">
+      <source src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/video/kinect.webm">
+      <!-- <source src="../assets/video/kinect.webm"> -->
+
+      <source src="
+https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/video/kinect.mp4">
+      <!-- <source src="../assets/video/kinect.mp4"> -->
     </video>
   </div>
 </template>
@@ -106,7 +110,7 @@ void main() {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.useLegacyLights = false;
-  renderer.setClearColor('#37393b'); 
+  renderer.setClearColor('#37393b');
   container.value.appendChild(renderer.domElement);
 
   mouse = new THREE.Vector3(0, 0, 1);
@@ -143,10 +147,10 @@ const onWindowResize = () => {
 };
 
 const onScroll = () => {
-  const scoll = new BackgroundAnimation(0,300)
+  const scoll = new BackgroundAnimation(0, 300)
   window.addEventListener('scroll', () => {
-    camera.position.x = scoll.getScrollFraction()*5000
-    camera.position.y = scoll.getScrollFraction()*5000
+    camera.position.x = scoll.getScrollFraction() * 5000
+    camera.position.y = scoll.getScrollFraction() * 5000
 
   })
 }

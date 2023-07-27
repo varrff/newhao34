@@ -1,7 +1,19 @@
-# Vue 3 + Vite
+# Newhao个人博客
+    我的前端技术很大一部分都是因为想写一个个人博客推动的，现在是第三版啦
+    之前一直觉得自己写的代码太丑陋不够规范所以也不好意思开源。
+    欢迎大家一起交流讨论
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+# 快速开始
 
-## Recommended IDE Setup
+1. 安装依赖：
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+   ```
+   npm install
+   ```
+
+2. 启动开发服务器：
+
+   ```
+   npm run dev
+   ```
+
