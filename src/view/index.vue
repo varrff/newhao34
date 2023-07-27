@@ -167,7 +167,7 @@ const postBiaoqian = async () => {
     try {
         const res = await postMessage(liuyanText.value)
         console.log(res);
-        if (res.response.status == 1) {
+        if (res.data.status == 1) {
             ElMessage({
                 message: '添加成功',
                 type: 'success',
