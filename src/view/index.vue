@@ -11,7 +11,6 @@
             <div id="introduce">
                 <h4>个人简介</h4>
                 <p class="state">天津 | 学生 | 天津现代职业技术学院 | 2021-2024</p>
-
                 <p>一名在天津上学的普通大学生，在学校学习软件专业，并在众多方向中选择了前端方向，</p>
                 <p>或许是因为我喜欢构建各种简洁而美观的动画,</p>
                 <p>并以前端为引子,开始更深入的了解计算机这个大世界,目前正在学习后端</p>
@@ -45,15 +44,27 @@
                 <img src="@assets/images/index/5.PNG" alt="">
             </div>
             <div class="page3-buttom" ref="page3Buttom">
-                <span class="icon" style="color: #232323;">&#xe673;</span>
-                <span class="icon" style="color: #009605;">&#xe643;</span>
-                <span class="icon" style="transform: scale(0.8) translateX(-10%); color: #ffe120;">&#xe8ae;</span>
-                <span class="icon juejin">&#xe643;</span>
-                <span class="icon" style="transform: scale(0.8) translateX(-10%); color: #242424;">&#xe600;</span>
+                <span @click="jumpSite('https://www.douyin.com/user/MS4wLjABAAAA-XHf1bm4eLyMDfa8pzXP2yiwLVBDbBdfq0eEe2G62FI')" class="icon" style="color: #232323;">&#xe673;</span>
+                <span @click="jumpSite('https://www.douban.com/people/190819556/?_i=3324722LkWkaot')" class="icon" style="color: #009605;">&#xe643;</span>
+                <span @click="jumpSite('https://m.okjike.com/users/76fa93ff-f9b1-45c2-b4e1-e3fdb011ebf9?ref=PROFILE_CARD&utm_source=user_card')" class="icon" style="transform: scale(0.8) translateX(-10%); color: #ffe120;">&#xe8ae;</span>
+                <span @click="jumpSite('https://juejin.cn/user/22462119019479/posts')" class="icon juejin">&#xe643;</span>
+                <span @click="jumpSite('https://github.com/varrff')" class="icon" style="transform: scale(0.8) translateX(-10%); color: #242424;">&#xe600;</span>
             </div>
 
         </div>
+        <div id="page4" class="main">
+            <h1>留言板</h1>
 
+            <div id="page4-content">
+                <div class="page4-content-scoll">
+                    <span v-for="item in biaoqianData" :key="item.id" :style="[`top:${item.y}%;`, `left:${item.x}%`]">
+                        {{ item.value }}
+                    </span>
+                </div>
+                <button @click="postBiaoqian()" class="icon">&#xe8a6;</button>
+                <input type="text" v-model="liuyanText" name="" id="">
+            </div>
+        </div>
     </div>
 </template>
 
@@ -61,8 +72,13 @@
 import { ref, onMounted } from "vue"
 import background from '../components/backgroundThreejs.vue'
 import BackgroundAnimation from '../js/BackgroundAnimation'
+import { getMessageData,postMessage } from '../api/index'
+import { ElMessage } from 'element-plus'
 let page1AnimationValue = ref(0)
 let page2AnimationValue = ref(110)
+let page4AnimationValue = ref(0)
+
+
 /**
  *  给一个变化的变量，然后给这个变量变化的区间，然后给返回的值的变化区间
  * 例如：scaleValue(bgAnimation.scrollFraction, [0.54, 0.66], [0, .7]);
@@ -73,10 +89,11 @@ function scaleValue(input, inputRange, outputRange) {
 const page2Animation = () => {
     const scoll1 = new BackgroundAnimation(50, 200)
     const scoll2 = new BackgroundAnimation(200, 300)
+    const scoll3 = new BackgroundAnimation(500, 600)
     window.addEventListener('scroll', () => {
         page1AnimationValue.value = scoll1.getScrollFraction()
         page2AnimationValue.value = scaleValue(scoll2.getScrollFraction(), [0.1, 0.9], [100, 80])
-        console.log(page2AnimationValue.value);
+        page4AnimationValue.value = scoll3.getScrollFraction()
     })
 }
 const page3Top = ref(null)
@@ -94,9 +111,9 @@ const page3Animation = () => {
             let prev = item.previousElementSibling || null
             let next = item.nextElementSibling || null;
 
-            let prev2 = ele2[index-1] || null
-            let next2 = ele2[index+1] || null;
-  
+            let prev2 = ele2[index - 1] || null
+            let next2 = ele2[index + 1] || null;
+
             let scale = 0.6
 
             resetScale()
@@ -125,11 +142,37 @@ const page3Animation = () => {
             page3Top.value.children[index].style.setProperty('--scale', 1)
         }
     }
-    
+
+}
+
+const biaoqianData = ref(null)
+
+const getBiaoqiant = async () => {
+    biaoqianData.value = await getMessageData()
+}
+const liuyanText = ref('')
+const postBiaoqian = async()=>{
+
+    try {
+        const res = await postMessage(liuyanText.value)
+        if(res.response.status==1){
+            ElMessage('添加成功')
+        }
+    } catch (error) {
+        ElMessage.error(error)
+    }
+    console.log(res.response.status);
+}
+/**
+ * 跳转其他网站，接收一个URL参数
+ */
+const jumpSite = url=>{
+    window.open(url,"_blank")
 }
 onMounted(() => {
     page2Animation()
     page3Animation()
+    getBiaoqiant()
 })
 </script>
 
@@ -232,7 +275,7 @@ onMounted(() => {
         justify-content: center;
         flex-wrap: nowrap;
         position: relative;
-        
+
         h1 {
             margin-top: 5vh;
             font-size: 3vw;
@@ -240,15 +283,15 @@ onMounted(() => {
 
         .page3-top {
             position: absolute;
-            width: 100vw;
+
             height: 70vh;
             top: 0;
             // bottom: 50%;
             transform: translateY(50%);
             display: flex;
-            
+
             img {
-                --scale:1;
+                --scale: 1;
                 width: calc(10.5vw + 4vw * var(--scale));
                 height: calc(23vw + 4vw * var(--scale));
                 position: relative;
@@ -290,6 +333,67 @@ onMounted(() => {
 
         }
     }
+
+    #page4 {
+        width: 100%;
+        height: 110vh;
+        position: relative;
+        justify-content: center;
+        align-items: start;
+        flex-wrap: nowrap;
+        background-color: rgb(28, 28, 28);
+
+        h1 {
+            margin-top: 10vh;
+            font-size: 85px;
+        }
+
+        #page4-content {
+            position: absolute;
+            width: 95%;
+            height: 78%;
+            border-radius: 10px;
+            top: 20%;
+            background-color: #393939;
+            overflow: hidden;
+
+            .page4-content-scoll {
+                width: 300%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                animation: biaoqianScoll infinite backwards 50s linear;
+
+                span {
+                    position: absolute;
+                }
+            }
+
+            button {
+                position: absolute;
+                bottom:2%;
+                right: 1%;
+                background-color: transparent;
+                border: 0;
+                font-size: 50px;
+                color: #a18cd1;
+                cursor: pointer;
+            }
+
+            input {
+                position: absolute;
+                bottom: 2%;
+                right: 4%;
+                width: 10%;
+                height: 5%;
+                border-radius: 15px;
+                border: 0;
+                padding: 10px;
+            }
+
+        }
+    }
 }
 
 @keyframes flowing {
@@ -305,4 +409,13 @@ onMounted(() => {
         background-position: 0% 50%;
     }
 }
-</style>
+
+@keyframes biaoqianScoll {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}</style>
