@@ -22,14 +22,14 @@ export default defineConfig({
   },
   assetsInclude: ['**/*.PNG','**/*.svg'], // 在这里添加 .PNG 文件的设置
   devServer: {
-    proxy: {
-      '/api': {
-        target: 'http://api.newhao2021.top:3001',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': '' 
-        }
-      }
-    }
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://api.newhao2021.top:3001',
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/api': '' 
+    //     }
+    //   }
+    // }
   }
 });
