@@ -175,7 +175,7 @@ const postBiaoqian = async () => {
             getBiaoqiant()
         }
     } catch (error) {
-        if (res.response.status == 429) {
+        if (error.response.status == 429) {
             ElMessage.error('一次只能添加一个标签，请在2小时后再添加')
         }else{
             ElMessage.error('服务器无响应，请稍后再试')
