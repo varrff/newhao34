@@ -128,7 +128,7 @@ const page3Animation = () => {
             let scale = 0.6
 
             resetScale()
-            console.log(offset);
+            // console.log(offset);
             if (prev) {
                 prev.style.setProperty('--scale', 1 + scale * Math.abs(offset - 1))
                 // prev2.style.setProperty('--scale',1-offset)
