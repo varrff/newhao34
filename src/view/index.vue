@@ -20,7 +20,7 @@
         </div>
         <div id="page2" class="main">
 
-            <p :class="page1AnimationValue > 0.1 && page1AnimationValue < 0.25 ? 'act' : ''">一名正在实习的前端的想法:</p>
+            <p :class="page1AnimationValue > 0.1 && page1AnimationValue < 0.25 ? 'act' : ''">刚出来工作的一些想法：</p>
             <p :class="page1AnimationValue > 0.25 && page1AnimationValue < 0.4 ? 'act' : ''">在我看来，以兴趣为驱动去学习是一件特别棒的事情。</p>
             <p :class="page1AnimationValue > 0.4 && page1AnimationValue < 0.5 ? 'act' : ''">毕竟在读大学之前,自己一直是一个学业上的学渣,显得毫无用处。
             </p>
