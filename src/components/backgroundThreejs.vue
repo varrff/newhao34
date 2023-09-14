@@ -1,11 +1,13 @@
 <template>
   <div ref="container">
     <video ref="video" loop muted crossOrigin="anonymous" playsinline style="display:none">
+      <source src="http://img.newhao2021.top/Newhao34/kinect.webm">
       <!-- <source src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/video/kinect.webm"> -->
       <source src="../assets/video/kinect.webm">
 
       <!-- <source src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/video/kinect.mp4"> -->
-      <source src="../assets/video/kinect.mp4">
+      <source src="http://img.newhao2021.top/Newhao34/kinect.mp4">
+      <!-- <source src="../assets/video/kinect.mp4"> -->
     </video>
   </div>
 </template>

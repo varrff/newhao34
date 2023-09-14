@@ -37,11 +37,17 @@
             <h1>你的下一个关注，何必是大佬</h1>
 
             <div class="page3-top" ref="page3Top">
-                <img src="@assets/images/index/1.PNG" alt="">
+                <img src="http://img.newhao2021.top/Newhao34/1.PNG" alt="">
+                <img src="http://img.newhao2021.top/Newhao34/2.PNG" alt="">
+                <img src="http://img.newhao2021.top/Newhao34/3.PNG" alt="">
+                <img src="http://img.newhao2021.top/Newhao34/4.PNG" alt="">
+                <img src="http://img.newhao2021.top/Newhao34/5.PNG" alt="">
+
+                <!-- <img src="@assets/images/index/1.PNG" alt="">
                 <img src="@assets/images/index/2.PNG" alt="">
                 <img src="@assets/images/index/3.PNG" alt="">
                 <img src="@assets/images/index/4.PNG" alt="">
-                <img src="@assets/images/index/5.PNG" alt="">
+                <img src="@assets/images/index/5.PNG" alt=""> -->
                 <!-- <img src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/1.PNG" alt="">
                 <img src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/2.PNG" alt="">
                 <img src="https://mp-fdbc9db4-eb1b-456f-984f-47ee229039f3.cdn.bspapp.com/newhao44/3.PNG" alt="">
@@ -115,7 +121,8 @@
             </button>
         </div>
         <div id="page6" class="main">
-            <video autoplay muted loop src="../assets/video/large.mp4"
+            <!-- ../assets/video/large.mp4 -->
+            <video autoplay muted loop src="http://img.newhao2021.top/Newhao34/large.mp4"
             :style="[page6AnimationValue>0&&page6AnimationValue<0.6?`opacity:${page6AnimationValue*1.5};`:`opacity:${1-page6AnimationValue}`,page6AnimationValue > 0.05 && page6AnimationValue < 0.72 ? 'position:fixed' : 'position: absolute;top:0vh;',
             page6AnimationValue > 0.72 ? 'position: absolute;top:90vh;' : '']"
             ></video>

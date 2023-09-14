@@ -73,7 +73,8 @@ const initThreeJs = ()=>{
 		// tree
 
 		const loader = new OBJLoader();
-		loader.load('/model/tree.obj', function (object) {
+		//         /model/tree.obj
+		loader.load('http://img.newhao2021.top/Newhao34/tree.obj', function (object) {
 
 			object.position.set(0, - 150, - 150);
 			object.scale.multiplyScalar(400);
