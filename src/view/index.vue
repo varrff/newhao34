@@ -63,10 +63,83 @@
             </div>
 
         </div>
+        <div id="page5" class="main">
+            <backgroundThree2 class="background2" :style="[page5AnimationValue > 0.05 && page5AnimationValue < 0.72 ? 'position:fixed' : 'position: absolute;top:0vh;',
+            page5AnimationValue > 0.72 ? 'position: absolute;top:200vh;' : ''
+            ]" />
+            <div class="text">
+                <h1 v-show="page5AnimationValue > 0.1 && page5AnimationValue < 0.25"
+                    :style="[`option:${page5AnimationValue + 0.3};`, `transform:scale(${page5AnimationValue + 0.6})`]">
+                    不止是程序员
+                </h1>
+                <h1 v-show="page5AnimationValue > 0.25 && page5AnimationValue < 0.35"
+                    :style="[`option:${page5AnimationValue + 0.3};`, `transform:scale(${page5AnimationValue + 0.6})`]">
+                    也想成为一个逍遥自在的诗人</h1>
+                <h1 v-show="page5AnimationValue > 0.35 && page5AnimationValue < 0.50"
+                    :style="[`option:${page5AnimationValue + 0.3};`, `transform:scale(${page5AnimationValue + 0.6})`]">
+                    欢迎来到我的小诗记
+                </h1>
+            </div>
+            <Transition name="page5">
+                <div class="page5-content" v-show="page5AnimationValue > 0.55 && page5AnimationValue < 0.75">
+                    <div class="page5-content-item" style="top: 30vh;left: 20vw;">
+                        <h1>春夜饮酒记</h1>
+                        <p>
+                            无端空虚思万千,酒杯抚摸情难言。<br />
+                            微醺之际世事忘,内心澄澈如山泉。<br />
+                            万籁俱寂心神定,沉醉片刻若仙境。<br />
+                            然而春风吹又起,此身应慕长安城。<br />
+                        </p>
+                    </div>
+                    <div class="page5-content-item" style="top: 70vh;left: 65vw;">
+                        <h1>无题..</h1>
+                        <p>
+                            内心若淡如灰烬，生命似淡淡蓝天。<br />
+                            虽然外界似静止画卷，心情却如浮云游荡。<br />
+                            向上苍祈问来日之路，莫惧，只管低首前行。<br />
+                        </p>
+                    </div>
+                    <div class="page5-content-item" style="top: 70vh;left: 65vw;">
+                        <h1>无题..</h1>
+                        <p>
+                            内心若淡如灰烬，生命似淡淡蓝天。<br />
+                            虽然外界似静止画卷，心情却如浮云游荡。<br />
+                            向上苍祈问来日之路，莫惧，只管低首前行。<br />
+                        </p>
+                    </div>
+                </div>
+            </Transition>
+            <button class="page5-content-button ">
+                <span>（暂未上线）</span>
+                <span></span>
+            </button>
+        </div>
+        <div id="page6" class="main">
+            <video autoplay muted loop src="../assets/video/large.mp4"
+            :style="[page6AnimationValue>0&&page6AnimationValue<0.6?`opacity:${page6AnimationValue*1.5};`:`opacity:${1-page6AnimationValue}`,page6AnimationValue > 0.05 && page6AnimationValue < 0.72 ? 'position:fixed' : 'position: absolute;top:0vh;',
+            page6AnimationValue > 0.72 ? 'position: absolute;top:90vh;' : '']"
+            ></video>
+            <div class="text" :style="[page6AnimationValue > 0.05 && page6AnimationValue < 0.62 ? 'position:fixed;top:15vh;left:19.3vw;' : 'position: absolute;top:10vh;',
+            page6AnimationValue > 0.62 ? 'position: absolute;top:125vh;' : '']">
+                <h1
+                 >
+                    音乐，嘈杂世界的逃生舱
+                </h1>
+                <h1
+                  style="font-size: 2vw;margin-top: 5%;">
+                    最近在听
+                </h1>
+
+            </div>
+            <div :style="[page6AnimationValue > 0.05 && page6AnimationValue < 0.62 ? 'position:fixed;top:25vh;left:2.2vw;' : 'position: absolute;top:20vh;left:3vw;',
+            page6AnimationValue > 0.62 ? 'position: absolute;top:135vh;left:3vw;' : '','width:30vw;']">
+                <music/>
+            </div>
+        </div>
         <div id="page4" class="main">
             <h1>留言板</h1>
 
-            <div id="page4-content">
+            <div id="page4-content" :style="[page6AnimationValue>0.6?`transform:scale(${page6AnimationValue})`:`transform:scale(0.6)`]">
                 <div class="page4-content-scoll">
                     <span v-for="item in biaoqianData" :key="item.id" :style="[`top:${item.y}%;`, `left:${item.x}%`]">
                         {{ item.value }}
@@ -82,14 +155,16 @@
 <script setup>
 import { ref, onMounted } from "vue"
 import background from '../components/backgroundThreejs.vue'
+import backgroundThree2 from "../components/backgroundThree2.vue"
 import BackgroundAnimation from '../js/BackgroundAnimation'
+import music from '../components/music.vue'
 import { getMessageData, postMessage } from '../api/index'
 import { ElMessage } from 'element-plus'
-let page1AnimationValue = ref(0)
-let page2AnimationValue = ref(110)
-let page4AnimationValue = ref(0)
-
-
+const page1AnimationValue = ref(0)
+const page2AnimationValue = ref(110)
+const page4AnimationValue = ref(0)
+const page5AnimationValue = ref(0)
+const page6AnimationValue = ref(0)
 /**
  *  给一个变化的变量，然后给这个变量变化的区间，然后给返回的值的变化区间
  * 例如：scaleValue(bgAnimation.scrollFraction, [0.54, 0.66], [0, .7]);
@@ -128,7 +203,7 @@ const page3Animation = () => {
             let scale = 0.6
 
             resetScale()
-            // console.log(offset);
+   
             if (prev) {
                 prev.style.setProperty('--scale', 1 + scale * Math.abs(offset - 1))
                 // prev2.style.setProperty('--scale',1-offset)
@@ -155,6 +230,19 @@ const page3Animation = () => {
     }
 
 }
+const page5Animation = () => {
+    const scoll = new BackgroundAnimation(500, 800)
+    window.addEventListener('scroll', () => {
+        page5AnimationValue.value = scoll.getScrollFraction()
+    })
+}
+const page6Animation = () => {
+    const scoll = new BackgroundAnimation(800, 1000)
+
+    window.addEventListener('scroll', () => {
+        page6AnimationValue.value = scoll.getScrollFraction()
+    })
+}
 
 const biaoqianData = ref(null)
 
@@ -166,7 +254,7 @@ const postBiaoqian = async () => {
 
     try {
         const res = await postMessage(liuyanText.value)
-        console.log(res);
+   
         if (res.data.status == 1) {
             ElMessage({
                 message: '添加成功',
@@ -177,12 +265,12 @@ const postBiaoqian = async () => {
     } catch (error) {
         if (error.response.status == 429) {
             ElMessage.error('一次只能添加一个标签，请在2小时后再添加')
-        }else{
+        } else {
             ElMessage.error('服务器无响应，请稍后再试')
         }
 
     }
-    // console.log(res.response.status);
+
 }
 /**
  * 跳转其他网站，接收一个URL参数
@@ -195,6 +283,8 @@ onMounted(() => {
     page2Animation()
     page3Animation()
     getBiaoqiant()
+    page5Animation()
+    page6Animation()
 })
 </script>
 
@@ -208,6 +298,7 @@ onMounted(() => {
         overflow: hidden;
     }
 
+
     .main {
         display: flex;
         width: 60%;
@@ -219,6 +310,7 @@ onMounted(() => {
         padding: 0 2vmin;
         place-content: center flex-start;
         color: #fff;
+        overflow: hidden;
     }
 
     .newh {
@@ -297,6 +389,7 @@ onMounted(() => {
         justify-content: center;
         flex-wrap: nowrap;
         position: relative;
+        padding: 0;
 
         h1 {
             margin-top: 5vh;
@@ -309,7 +402,7 @@ onMounted(() => {
             height: 70vh;
             top: 0;
             // bottom: 50%;
-            transform: translate(-15%,50%);
+            transform: translate(-15%, 50%);
             display: flex;
 
             img {
@@ -357,14 +450,13 @@ onMounted(() => {
     }
 
     #page4 {
-        width: 100%;
+        width: 100vw;
         height: 110vh;
         position: relative;
         justify-content: center;
         align-items: start;
         flex-wrap: nowrap;
         background-color: rgb(28, 28, 28);
-
         h1 {
             margin-top: 10vh;
             font-size: 85px;
@@ -416,6 +508,100 @@ onMounted(() => {
 
         }
     }
+
+    #page5 {
+        height: 300vh;
+        position: relative;
+        width: 100vw;
+        margin: 0;
+        .background2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .text {
+            position: fixed;
+            top: 30%;
+            left: 20%;
+            transform: translate(-50%, -50%);
+
+            h1 {
+                color: #fff;
+                font-size: 3vw;
+            }
+        }
+
+        .page5-content-button {
+            position: absolute;
+            bottom: 20vh;
+            left: 50vw;
+            border-radius: 12px;
+            position: absolute;
+            border: #393939 1px;
+            cursor: pointer;
+            width: 10vw;
+            height: 3vh;
+            transform: translatex(-50%);
+            transition: all 1s;
+        }
+        .page5-content-button:hover{
+            background-color: rgb(74, 74, 74);
+            color: #fff;
+        }
+
+
+        .page5-content {
+            position: fixed;
+
+            .page5-content-item {
+                position: fixed;
+                background-color: rgba(74, 74, 74, 0.3);
+                padding: 1%;
+                z-index: 10;
+            }
+        }
+
+        .page5-enter-active,
+        .page5-leave-active {
+            transition: all 0.5s ease;
+        }
+
+        .page5-enter-from,
+        .page5-leave-to {
+            opacity: 0;
+        }
+    }
+
+    #page6 {
+        width: 100vw;
+        height: 200vh;
+        // overflow: hidden;
+        padding: 0;
+        position: relative;
+        background-color: black;
+
+        video {
+            width: 150vw;
+            height: 130vh;
+            position: absolute;
+            top: 0;
+            left: -20vw;
+            opacity: 0;
+            // margin-top: -60vh;
+        }
+        .text {
+            position: fixed;
+            top: 10vh;
+            left: 20vw;
+            z-index: 10;
+            transform: translate(-50%, -50%);
+
+            h1 {
+                font-size: 3vw;
+            }
+        }
+    }
 }
 
 @keyframes flowing {
@@ -440,5 +626,4 @@ onMounted(() => {
     100% {
         transform: translateX(-100%);
     }
-}
-</style>
+}</style>
