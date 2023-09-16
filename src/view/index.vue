@@ -7,7 +7,7 @@
         <div id="intro" class="main">
             <h2 class=" h2">你好啊，我是</h2>
             <h1 class="newh h1">wujiahao</h1>
-            <h3 class="newh h3">前端开发</h3>
+            <h3 class="newh h3">.NET开发|前端开发</h3>
             <div id="introduce">
                 <h4>个人简介</h4>
                 <p class="state">天津 | 学生 | 天津现代职业技术学院 | 2021-2024</p>
