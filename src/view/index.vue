@@ -10,10 +10,10 @@
             <h3 class="newh h3">.NET开发|前端开发</h3>
             <div id="introduce">
                 <h4>个人简介</h4>
-                <p class="state">天津 | 学生 | 天津现代职业技术学院 | 2021-2024</p>
-                <p>一名在天津上学的普通大学生，在学校学习软件专业，并在众多方向中选择了前端方向，</p>
+                <p class="state">天津 | 天津现代职业技术学院 | 2020-2023</p>
+                <p>刚毕业的大学生，并在众多方向中选择了前端方向，</p>
                 <p>或许是因为我喜欢构建各种简洁而美观的动画,</p>
-                <p>并以前端为引子,开始更深入的了解计算机这个大世界,目前正在学习后端</p>
+                <p>并以前端为引子,开始更深入的了解计算机这个大世界,慢慢也是个“全干”程序员了。</p>
                 <p>热衷各种好玩的新技术新特性</p>
 
             </div>
@@ -547,8 +547,8 @@ onMounted(() => {
             position: absolute;
             border: #393939 1px;
             cursor: pointer;
-            width: 10vw;
-            height: 3vh;
+            width: 11vw;
+            height: 4vh;
             transform: translatex(-50%);
             transition: all 1s;
         }
